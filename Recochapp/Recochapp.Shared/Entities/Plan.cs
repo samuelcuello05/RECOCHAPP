@@ -53,7 +53,7 @@ namespace Recochapp.Shared.Entities
         [JsonIgnore]
         public PlanDestination? Destination { get; set; }
         public int PlanDestinationId { get; set; }
-        public string PlanDestinationName { get; set; } = null!;
+        public string PlanDestinationType { get; set; } = null!;
 
         [JsonIgnore]
         public Group? Group { get; set; }

@@ -57,5 +57,8 @@ namespace Recochapp.Shared.Entities
 
         [JsonIgnore]
         public ICollection<Expense> Expenses { get; set; } = null!;
+
+        [JsonIgnore]
+        public ICollection<UserGroup> UserGroups { get; set; } = null!;
     }
 }

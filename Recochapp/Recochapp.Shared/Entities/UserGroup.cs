@@ -7,20 +7,16 @@ using System.Threading.Tasks;
 
 namespace Recochapp.Shared.Entities
 {
-    public class PlanDestination
+    public class UserGroup
     {
         public int Id { get; set; }
 
-        public string Type { get; set; } = null!;
+        [JsonIgnore]
+        public User? User { get; set; }
+        public int UserId { get; set; }
 
         [JsonIgnore]
-        public Establishment? Establishment { get; set; }
-        public int? EstablishmentId { get; set; }
-
-        [JsonIgnore]
-        public Place? Place { get; set; }
-        public int? PlaceId { get; set; }
-
-
+        public Group? Group { get; set; }
+        public int GroupId { get; set; }
     }
 }

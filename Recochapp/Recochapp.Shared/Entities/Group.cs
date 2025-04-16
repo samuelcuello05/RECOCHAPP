@@ -38,8 +38,9 @@ namespace Recochapp.Shared.Entities
         [Display(Name = "Group image")]
         public string? ImageUrl { get; set; }
 
+        public int MembersQuantity { get; set; } = 0;
+
         [JsonIgnore]
-        public User User { get; set; } = null!;
-        public int UserId { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; } = null!;
     }
 }
