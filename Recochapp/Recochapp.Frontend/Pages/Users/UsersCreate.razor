@@ -1,0 +1,5 @@
+﻿@page "/users/create"
+
+<h3>Crear Usuario</h3>
+
+<UsersForm @ref="usersForm" User="user" OnValidSubmit="CreateAsync" ReturnAction="Return" />
