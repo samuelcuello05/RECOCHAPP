@@ -60,7 +60,7 @@ namespace Recochapp.Shared.Entities
         public int GroupId { get; set; }
 
         [JsonIgnore]
-        public ICollection<Expense> Expenses { get; set; } = null!;
+        public ICollection<Expense>? Expenses { get; set; }
 
     }
 }

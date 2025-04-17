@@ -29,11 +29,11 @@ namespace Recochapp.Shared.Entities
 
 
         [JsonIgnore]
-        public User User { get; set; } = null!;
+        public User? User { get; set; }
         public int UserId { get; set; }
 
         [JsonIgnore]
-        public Plan Plan { get; set; } = null!;
+        public Plan? Plan { get; set; }
         public int PlanId { get; set; }
     }
 }

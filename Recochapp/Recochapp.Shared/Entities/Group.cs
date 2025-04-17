@@ -41,6 +41,6 @@ namespace Recochapp.Shared.Entities
         public int MembersQuantity { get; set; } = 0;
 
         [JsonIgnore]
-        public ICollection<UserGroup> UserGroups { get; set; } = null!;
+        public ICollection<UserGroup>? UserGroups { get; set; }
     }
 }

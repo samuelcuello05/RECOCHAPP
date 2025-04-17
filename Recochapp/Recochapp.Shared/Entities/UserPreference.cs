@@ -12,11 +12,11 @@ namespace Recochapp.Shared.Entities
         public int Id { get; set; }
 
         [JsonIgnore]
-        public User User { get; set; } = null!;
+        public User? User { get; set; }
         public int UserId { get; set; }
 
         [JsonIgnore]
-        public Preference Preference { get; set; } = null!;
+        public Preference? Preference { get; set; }
         public int PreferenceId { get; set; }
     }
 }

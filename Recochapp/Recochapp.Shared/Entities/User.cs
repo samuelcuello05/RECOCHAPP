@@ -53,15 +53,15 @@ namespace Recochapp.Shared.Entities
 
 
         [JsonIgnore]
-        public ICollection<Review> Reviews { get; set; } = null!;
+        public ICollection<Review>? Reviews { get; set; }
 
         [JsonIgnore]
-        public ICollection<Expense> Expenses { get; set; } = null!;
+        public ICollection<Expense>? Expenses { get; set; }
 
         [JsonIgnore]
-        public ICollection<UserGroup> UserGroups { get; set; } = null!;
+        public ICollection<UserGroup>? UserGroups { get; set; }
 
         [JsonIgnore]
-        public ICollection<UserPreference> UserPreferences { get; set; } = null!;
+        public ICollection<UserPreference>? UserPreferences { get; set; }
     }
 }
