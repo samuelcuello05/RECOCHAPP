@@ -17,6 +17,10 @@ namespace Recochapp.Backend.Data
 
             modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<User>().HasIndex(x => x.PhoneNumber).IsUnique();
+
+            modelBuilder.Entity<Group>().HasIndex(x => x.AccessCode).IsUnique();
+
+            modelBuilder.Entity<Establishment>().HasIndex(x => x.Email).IsUnique();
         }
 
     }
