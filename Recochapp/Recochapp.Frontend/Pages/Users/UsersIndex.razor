@@ -1,0 +1,47 @@
+﻿@page "/Users"
+
+<h3>Usuarios</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/users/create">Nuevo Usuario</a>
+</div>
+
+<GenericList MyList="Users">
+    <Body>
+        <table class="table table-striped">
+            <thread>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thread>
+            <tbody>
+                @foreach(var user in Users!)
+                {
+                    <tr>
+                        <td>
+                            @user.Name
+                        </td>
+                        <td>
+                            @user.Surname
+                        </td>
+                        <td>
+                            @user.Email
+                        </td>
+                        <td>
+                            @user.PhoneNumber
+                        </td>
+                        <td>
+                            @user.DateOfBirth
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" href="/users/edit/@user.Id">Editar</a>
+                            <a class="btn btn-danger" @onclick=@(() => DeleteAsync(user))>Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>

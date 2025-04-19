@@ -31,7 +31,7 @@ namespace Recochapp.Shared.Entities
         public string? ImageUrl { get; set; }
 
         [JsonIgnore]
-        public ICollection<UserPreference> UserPreferences { get; set; } = null!;
+        public ICollection<UserPreference>? UserPreferences { get; set; }
 
     }
 }

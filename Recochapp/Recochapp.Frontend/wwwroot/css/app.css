@@ -101,3 +101,10 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+@font-face {
+    font-family: 'Beautiful Freak Bold';
+    src: url('/fonts/Beautiful Freak Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}

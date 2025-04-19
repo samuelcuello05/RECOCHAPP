@@ -62,7 +62,7 @@ namespace Recochapp.Shared.Entities
         public string? ImageUrl { get; set; }
 
         [JsonIgnore]
-        public ICollection<Review> Reviews { get; set; } = null!;
+        public ICollection<Review>? Reviews { get; set; }
 
     }
 }

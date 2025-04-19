@@ -71,7 +71,7 @@ namespace Recochapp.Backend.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Establishment");
+                    b.ToTable("Establishments");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Expense", b =>
@@ -102,7 +102,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Expense");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Group", b =>
@@ -114,14 +114,8 @@ namespace Recochapp.Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AccessCode")
-                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -137,9 +131,10 @@ namespace Recochapp.Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccessCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AccessCode] IS NOT NULL");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Place", b =>
@@ -167,7 +162,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Place");
+                    b.ToTable("Places");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Plan", b =>
@@ -221,7 +216,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("PlanDestinationId");
 
-                    b.ToTable("Plan");
+                    b.ToTable("Plans");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.PlanDestination", b =>
@@ -248,7 +243,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("PlaceId");
 
-                    b.ToTable("PlanDestination");
+                    b.ToTable("PlanDestinations");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Preference", b =>
@@ -274,7 +269,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Preference");
+                    b.ToTable("Preferences");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Review", b =>
@@ -305,7 +300,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.User", b =>
@@ -373,7 +368,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserGroup");
+                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.UserPreference", b =>
@@ -396,7 +391,7 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPreference");
+                    b.ToTable("UserPreferences");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Expense", b =>

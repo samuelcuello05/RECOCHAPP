@@ -26,11 +26,11 @@ namespace Recochapp.Shared.Entities
 
 
         [JsonIgnore]
-        public Establishment Establishment { get; set; } = null!;
+        public Establishment? Establishment { get; set; }
         public int EstablishmentId { get; set; }
 
         [JsonIgnore]
-        public User User { get; set; } = null!;
+        public User? User { get; set; }
         public int UserId { get; set; }
     }
 }
