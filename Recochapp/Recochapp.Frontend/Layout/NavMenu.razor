@@ -1,34 +1,39 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Recochapp.Frontend</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+﻿<div class="sidebar">
+    <div class="profile">
+        <div class="profile-icon">P</div>
+        <div class="profile-text">
+            <div class="username">Perfil</div>
+            <div class="user-title">Nombre del usuario</div>
+        </div>
     </div>
+
+    <a href="" class="menu-item">
+        <img src="/images/principal.png" alt="Icono Principal" />
+        <span class="nav-text">Principal</span>
+    </a>
+
+    <a href="#" class="menu-item">
+        <img src="/images/buscar.png" alt="Icono Buscar" />
+        <span class="nav-text">Buscar</span>
+    </a>
+
+    <a href="#" class="menu-item">
+        <img src="/images/resenas.png" alt="Icono Reseñas" />
+        <span class="nav-text">Reseñas</span>
+    </a>
+
+    <a href="groups" class="menu-item">
+        <img src="/images/grupos.png" alt="Icono Grupos" />
+        <span class="nav-text">Grupos</span>
+    </a>
+
+    <a href="users" class="menu-item">
+        <img src="/images/perfil.png" alt="Icono Perfil" />
+        <span class="nav-text">Perfil</span>
+    </a>
+
+    <a href="#" class="menu-item">
+        <img src="/images/salirse.png" alt="Icono Salirse" />
+        <span class="nav-text">Salirse</span>
+    </a>
 </div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="users">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Usuarios
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

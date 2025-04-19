@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recochapp.Backend.Data;
 
@@ -11,9 +12,11 @@ using Recochapp.Backend.Data;
 namespace Recochapp.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250419044403_GroupCorrections")]
+    partial class GroupCorrections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,6 +117,7 @@ namespace Recochapp.Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AccessCode")
+                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
@@ -131,8 +135,7 @@ namespace Recochapp.Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccessCode")
-                        .IsUnique()
-                        .HasFilter("[AccessCode] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Groups");
                 });

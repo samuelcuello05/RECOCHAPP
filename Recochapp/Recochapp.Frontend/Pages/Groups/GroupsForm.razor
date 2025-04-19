@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<style>
+    .crear-grupo-container {
+        background-image: url('/images/creargrupofondo.png');
+        height: 100vh;
+        overflow: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .titulo-crear {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+        font-size: 70px;
+        font-weight: bold;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-box {
+        background-color: #ffffff;
+        border-radius: 1.5rem;
+        padding: 2rem 2.5rem;
+        max-width: 1200px;
+        height: fit-content; /* se ajusta automáticamente */
+        overflow: visible; /* evita scroll */
+        width: 100%;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        position: relative;
+
+    }
+
+    .volver-icono {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .paso-1 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .input-grupo {
+        margin-bottom: 2rem;
+    }
+
+        .input-grupo label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-grupo input {
+            width: 100%;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: #f3f3f3;
+        }
+
+    .paso-2 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+    }
+
+    .paso-2-texto {
+        font-size: 1.25rem;
+        font-weight: bold;
+        max-width: 60%;
+    }
+
+    .paso-2-imagen {
+        max-width: 35%;
+        margin-right: 250px;
+    }
+
+        .paso-2-imagen img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .boton-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -100px;
+    }
+
+    .boton-crear {
+        background-color: #3B82F6;
+        color: white;
+        border: none;
+        padding: 0.75rem 3rem;
+        border-radius: 2rem;
+        font-weight: bold;
+    }
+</style>
+
+<div class="crear-grupo-container">
+
+    <div class="titulo-crear">CREA UN GRUPO</div>
+
+    <div class="form-wrapper">
+        <div class="form-box">
+
+            <span class="volver-icono" @onclick="ConfirmReturnAsync"><img src="/images/volverCrearGrupo.png" alt="VolverImage" /></span><br /><br />
+
+            <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+                <DataAnnotationsValidator />
+
+                <div class="paso-1">
+                    Paso 1: Para empezar a crear tu grupo deberías ponerle un nombre
+                </div>
+
+                <div class="input-grupo">
+                    <label style="font-weight: bold;">Nombre del grupo</label>
+                    <InputText class="form-control" placeholder="Nombre del grupo dado por el usuario" @bind-Value="@Group.Name" />
+                    <ValidationMessage For="@(() => Group.Name)" />
+                </div>
+
+                <div class="paso-2">
+                    <div class="paso-2-texto">
+                        Paso 2: Invoca a los tuyos, tráete a todos los parceros pa’ acá
+                    </div>
+
+                    <div class="paso-2-imagen">
+                        <img src="/images/creargrupoIcon.png" alt="Personaje" />
+                    </div>
+                </div>
+
+                <div class="boton-container">
+                    <button type="submit" class="boton-crear">Crear</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>

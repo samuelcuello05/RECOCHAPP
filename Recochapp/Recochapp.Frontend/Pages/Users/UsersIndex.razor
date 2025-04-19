@@ -1,5 +1,6 @@
 ﻿@page "/Users"
-<h3>Users</h3>
+
+<h3>Usuarios</h3>
 
 <div class="mb-3">
     <a class="btn btn-primary" href="/users/create">Nuevo Usuario</a>
@@ -35,8 +36,8 @@
                             @user.DateOfBirth
                         </td>
                         <td>
-                            <a class="btn btn-warning">Editar</a>
-                            <a class="btn btn-danger">Eliminar</a>
+                            <a class="btn btn-warning" href="/users/edit/@user.Id">Editar</a>
+                            <a class="btn btn-danger" @onclick=@(() => DeleteAsync(user))>Eliminar</a>
                         </td>
                     </tr>
                 }
