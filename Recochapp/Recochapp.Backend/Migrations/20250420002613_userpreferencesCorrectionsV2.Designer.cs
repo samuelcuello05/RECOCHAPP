@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recochapp.Backend.Data;
 
@@ -11,9 +12,11 @@ using Recochapp.Backend.Data;
 namespace Recochapp.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250420002613_userpreferencesCorrectionsV2")]
+    partial class userpreferencesCorrectionsV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,8 +152,8 @@ namespace Recochapp.Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Budget")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
                         .HasMaxLength(50)
@@ -197,8 +200,8 @@ namespace Recochapp.Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Budget")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
                         .HasMaxLength(50)

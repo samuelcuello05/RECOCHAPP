@@ -14,8 +14,6 @@ namespace Recochapp.Backend.Data
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Establishment> Establishments { get; set; }
         public DbSet<Expense> Expenses { get; set; }
-        public DbSet<Place> Places { get; set; }
-        public DbSet<PlanDestination> PlanDestinations { get; set; }
         public DbSet<Preference> Preferences { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }

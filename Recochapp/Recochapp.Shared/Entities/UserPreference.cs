@@ -12,8 +12,8 @@ namespace Recochapp.Shared.Entities
         public int Id { get; set; }
 
         [JsonIgnore]
-        public User? User { get; set; }
-        public int UserId { get; set; }
+        public Plan? Plan { get; set; }
+        public int PlanId { get; set; }
 
         [JsonIgnore]
         public Preference? Preference { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recochapp.Backend.Data;
 
@@ -11,9 +12,11 @@ using Recochapp.Backend.Data;
 namespace Recochapp.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250420000311_preferenceCorrections")]
+    partial class preferenceCorrections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,8 +152,8 @@ namespace Recochapp.Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Budget")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
                         .HasMaxLength(50)
@@ -197,12 +200,17 @@ namespace Recochapp.Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Budget")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -316,17 +324,17 @@ namespace Recochapp.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("PlanId")
+                    b.Property<int>("PreferenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PreferenceId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlanId");
-
                     b.HasIndex("PreferenceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserPreferences");
                 });
@@ -405,21 +413,21 @@ namespace Recochapp.Backend.Migrations
 
             modelBuilder.Entity("Recochapp.Shared.Entities.UserPreference", b =>
                 {
-                    b.HasOne("Recochapp.Shared.Entities.Plan", "Plan")
-                        .WithMany("UserPreferences")
-                        .HasForeignKey("PlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Recochapp.Shared.Entities.Preference", "Preference")
                         .WithMany("UserPreferences")
                         .HasForeignKey("PreferenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Plan");
+                    b.HasOne("Recochapp.Shared.Entities.User", "User")
+                        .WithMany("UserPreferences")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Preference");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Establishment", b =>
@@ -435,8 +443,6 @@ namespace Recochapp.Backend.Migrations
             modelBuilder.Entity("Recochapp.Shared.Entities.Plan", b =>
                 {
                     b.Navigation("Expenses");
-
-                    b.Navigation("UserPreferences");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Preference", b =>
@@ -451,6 +457,8 @@ namespace Recochapp.Backend.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("UserGroups");
+
+                    b.Navigation("UserPreferences");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,23 +12,19 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(30)]
-        [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Preference name can only contain letters.")]
-        [Display(Name = "Preference name")]
+        [Display(Name = "Presupuesto del plan")]
         [DataType(DataType.Text)]
-        public string Name { get; set; } = null!;
+        public string? Budget { get; set; }
 
-        [MaxLength(200)]
-        [Required]
-        [RegularExpression(@"^[a-zA-Z0-9\s.,;:!?]+$", ErrorMessage = "Description can only contain letters, numbers, and punctuation.")]
-        [Display(Name = "Preference description")]
+        [MaxLength(50)]
+        [Display(Name = "Categoria del plan")]
         [DataType(DataType.Text)]
-        public string Description { get; set; } = null!;
+        public string? Category { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        [Display(Name = "Profile image")]
-        public string? ImageUrl { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Actividad del plan")]
+        [DataType(DataType.Text)]
+        public string? Activity { get; set; }
 
         [JsonIgnore]
         public ICollection<UserPreference>? UserPreferences { get; set; }

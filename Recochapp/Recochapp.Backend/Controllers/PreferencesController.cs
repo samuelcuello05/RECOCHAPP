@@ -5,12 +5,13 @@ using Recochapp.Shared.Entities;
 
 namespace Recochapp.Backend.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
-    public class PlansController : ControllerBase
+    public class PreferencesController : ControllerBase
     {
         private readonly DataContext _dbcontext;
-        public PlansController(DataContext dbcontext)
+        public PreferencesController(DataContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
@@ -20,7 +21,7 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
-                return Ok(await _dbcontext.Plans.ToListAsync());
+                return Ok(await _dbcontext.Preferences.ToListAsync());
             }
             catch (Exception ex)
             {
@@ -33,47 +34,28 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
-                var Plan = await _dbcontext.Plans.FindAsync(id);
-                if (Plan == null)
+                var Preference = await _dbcontext.Preferences.FindAsync(id);
+                if (Preference == null)
                 {
                     return NotFound();
                 }
-                return Ok(Plan);
+                return Ok(Preference);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(Plan Plan)
+        public async Task<IActionResult> PostAsync(Preference preference)
         {
             try
             {
-                _dbcontext.Add(Plan);
+                _dbcontext.Add(preference);
                 await _dbcontext.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-            try
-            {
-                var Plan = await _dbcontext.Plans.FindAsync(id);
-                if (Plan == null)
-                {
-                    return NotFound();
-                }
-                _dbcontext.Remove(Plan);
-                await _dbcontext.SaveChangesAsync();
-                return NoContent();
+                return Ok(preference);
             }
             catch (Exception ex)
             {
