@@ -61,7 +61,5 @@ namespace Recochapp.Shared.Entities
         [JsonIgnore]
         public ICollection<UserGroup>? UserGroups { get; set; }
 
-        [JsonIgnore]
-        public ICollection<UserPreference>? UserPreferences { get; set; }
     }
 }

@@ -12,55 +12,50 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(50)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters.")]
-        [Display(Name = "Plan name")]
+        [MaxLength(50, ErrorMessage = "El Nombre del plan no puede contener más de 50 caracteres.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "El Nombre del plan solo puede contener letras.")]
+        [Display(Name = "Nombre del plan")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Name is required.")]
+        [Required(ErrorMessage = "El Nombre del plan es obligatorio.")]
         public string Name { get; set; } = null!;
 
-        [MaxLength(200)]
-        [RegularExpression(@"^[a-zA-Z0-9\s.,!?]+$", ErrorMessage = "Description can only contain letters, numbers, and punctuation.")]
-        [Display(Name = "Plan description")]
-        [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Description is required.")]
-        public string? Description { get; set; }
-
-        [Display(Name = "Plan budget")]
-        [Required(ErrorMessage = "Budget is required.")]
-        [Range(0, double.MaxValue, ErrorMessage = "Budget must be a positive number.")]
-        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Budget must be a valid number with up to two decimal places.")]
-        [DataType(DataType.Currency)]
-        public double Budget { get; set; }
+        [Display(Name = "Presupuesto del plan")]
+        [DataType(DataType.Text)]
+        public string? Budget { get; set; }
 
         [MaxLength(50)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Category can only contain letters.")]
-        [Display(Name = "Plan category")]
+        [Display(Name = "Categoria del plan")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Category is required.")]
-        public string Category { get; set; } = null!;
+        public string? Category { get; set; }
+
+        [MaxLength(50)]
+        [Display(Name = "Actividad del plan")]
+        [DataType(DataType.Text)]
+        public string? Activity { get; set; }
 
         public double TotalCost { get; set; }
 
         public bool Status { get; set; }
 
-        [Display(Name = "Plan date")]
-        [Required(ErrorMessage = "Date is required.")]
-        [DataType(DataType.Date)]
+        [Display(Name = "Fecha del plan")]
+        [Required(ErrorMessage = "La Fecha del plan es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "Debe ingresar una Fecha para el plan.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [JsonIgnore]
-        public PlanDestination? Destination { get; set; }
-        public int PlanDestinationId { get; set; }
-        public string PlanDestinationType { get; set; } = null!;
+        public Group? Group { get; set; }
+        public int? GroupId { get; set; }
 
         [JsonIgnore]
-        public Group? Group { get; set; }
-        public int GroupId { get; set; }
+        public Establishment? Establishment { get; set; }
+        public int? EstablishmentId { get; set; }
 
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }
+
+        [JsonIgnore]
+        public ICollection<UserPreference>? UserPreferences { get; set; }
 
     }
 }

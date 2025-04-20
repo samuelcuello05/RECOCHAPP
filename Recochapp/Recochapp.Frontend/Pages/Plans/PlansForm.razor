@@ -1,0 +1,166 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<style>
+    .container {
+        background-image: url('/images/crearplanfondo.jpg');
+        height: 100vh;
+        overflow: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .titulo-crear {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #DC4920;
+        text-align: left;
+        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+        font-size: 70px;
+        font-weight: bold;
+        margin-left:60px;
+        margin-top: 40px;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .volver-icono {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .input-plan {
+        margin-bottom: 2rem;
+        margin-left: 4rem;
+
+    }
+
+        .input-plan label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-plan input {
+            width: 100%;
+            max-width: 500px; /* nuevo */
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: #f3f3f3;
+        }
+
+    .form-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        gap: 2rem;
+    }
+
+    .imagen {
+        width: 500px;
+        margin-top: 1rem;
+    }
+
+    .inputs-container {
+        flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+    }
+
+    .boton-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 28rem;
+        justify-content: flex-end;
+    }
+
+    .boton-crear {
+        background-color: #3B82F6;
+        color: white;
+        padding: 0.75rem 3rem;
+        border-radius: 1rem;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+    }
+
+    .boton-cancelar {
+        background-color: #E94B2B;
+        color: white;
+        padding: 0.75rem 3rem;
+        border-radius: 1rem;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="container">
+
+    <div class="titulo-crear">VAMOS A ARMAR LA GUACHAFITA</div>
+
+    <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-content">
+            <div class="inputs-container">
+                <div class="input-plan">
+                    <label style="font-weight: bold;">Ponle un nombre a este plan</label>
+                    <InputText class="form-control" placeholder="Nombre del plan" @bind-Value="@Plan.Name" />
+                    <ValidationMessage For="@(() => Plan.Name)" />
+                </div>
+
+                <div class="input-plan">
+                    <label style="font-weight: bold;">En qué fecha te gustaría realizar el plan</label>
+                    <InputDate class="form-control" @bind-Value="@Plan.Date" />
+                    <ValidationMessage For="@(() => Plan.Date)" />
+                </div>
+
+                <div class="input-plan">
+                    <label style="font-weight: bold;">Seleccione un grupo</label>
+                    <InputSelect @bind-Value="Plan.GroupId" class="form-control">
+                        <option value="">Seleccione un grupo</option>
+                        @foreach (var group in Groups)
+                        {
+                            <option value="@group.Id">@group.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Plan.GroupId)" />
+                </div>
+
+                <div class="input-plan">
+                    <label style="font-weight: bold;">Seleccione un establecimiento</label>
+                    <InputSelect @bind-Value="Plan.EstablishmentId" class="form-control">
+                        <option value="">Seleccione un establecimiento</option>
+                        @foreach (var establishment in Establishments)
+                        {
+                            <option value="@establishment.Id">@establishment.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Plan.EstablishmentId)" />
+                </div>
+
+            </div>
+            <div class="boton-container">
+                <button type="submit" class="boton-crear">Crear</button>
+                <span class="boton-cancelar" @onclick="ConfirmReturnAsync">Cancelar</span>
+            </div>
+
+            <div class="imagen">
+                <img src="/images/clearplanicon.png" alt="Personaje" style="width: 100%;" />
+            </div>
+        </div>
+    </EditForm>
+
+</div>
+

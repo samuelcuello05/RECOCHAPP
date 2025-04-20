@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recochapp.Backend.Data;
 
@@ -11,9 +12,11 @@ using Recochapp.Backend.Data;
 namespace Recochapp.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250419181155_PlansModifications")]
+    partial class PlansModifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,6 +140,34 @@ namespace Recochapp.Backend.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("Recochapp.Shared.Entities.Place", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Places");
+                });
+
             modelBuilder.Entity("Recochapp.Shared.Entities.Plan", b =>
                 {
                     b.Property<int>("Id")
@@ -145,30 +176,31 @@ namespace Recochapp.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Activity")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Budget")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
 
                     b.Property<string>("Category")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EstablishmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GroupId")
+                    b.Property<int>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PlanDestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlanDestinationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -178,11 +210,38 @@ namespace Recochapp.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstablishmentId");
-
                     b.HasIndex("GroupId");
 
+                    b.HasIndex("PlanDestinationId");
+
                     b.ToTable("Plans");
+                });
+
+            modelBuilder.Entity("Recochapp.Shared.Entities.PlanDestination", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("EstablishmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstablishmentId");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("PlanDestinations");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Preference", b =>
@@ -193,16 +252,18 @@ namespace Recochapp.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Activity")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Budget")
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -316,17 +377,17 @@ namespace Recochapp.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("PlanId")
+                    b.Property<int>("PreferenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PreferenceId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlanId");
-
                     b.HasIndex("PreferenceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserPreferences");
                 });
@@ -352,17 +413,36 @@ namespace Recochapp.Backend.Migrations
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Plan", b =>
                 {
+                    b.HasOne("Recochapp.Shared.Entities.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Recochapp.Shared.Entities.PlanDestination", "Destination")
+                        .WithMany()
+                        .HasForeignKey("PlanDestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Destination");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("Recochapp.Shared.Entities.PlanDestination", b =>
+                {
                     b.HasOne("Recochapp.Shared.Entities.Establishment", "Establishment")
                         .WithMany()
                         .HasForeignKey("EstablishmentId");
 
-                    b.HasOne("Recochapp.Shared.Entities.Group", "Group")
+                    b.HasOne("Recochapp.Shared.Entities.Place", "Place")
                         .WithMany()
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("PlaceId");
 
                     b.Navigation("Establishment");
 
-                    b.Navigation("Group");
+                    b.Navigation("Place");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Review", b =>
@@ -405,21 +485,21 @@ namespace Recochapp.Backend.Migrations
 
             modelBuilder.Entity("Recochapp.Shared.Entities.UserPreference", b =>
                 {
-                    b.HasOne("Recochapp.Shared.Entities.Plan", "Plan")
-                        .WithMany("UserPreferences")
-                        .HasForeignKey("PlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Recochapp.Shared.Entities.Preference", "Preference")
                         .WithMany("UserPreferences")
                         .HasForeignKey("PreferenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Plan");
+                    b.HasOne("Recochapp.Shared.Entities.User", "User")
+                        .WithMany("UserPreferences")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Preference");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Establishment", b =>
@@ -435,8 +515,6 @@ namespace Recochapp.Backend.Migrations
             modelBuilder.Entity("Recochapp.Shared.Entities.Plan", b =>
                 {
                     b.Navigation("Expenses");
-
-                    b.Navigation("UserPreferences");
                 });
 
             modelBuilder.Entity("Recochapp.Shared.Entities.Preference", b =>
@@ -451,6 +529,8 @@ namespace Recochapp.Backend.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("UserGroups");
+
+                    b.Navigation("UserPreferences");
                 });
 #pragma warning restore 612, 618
         }

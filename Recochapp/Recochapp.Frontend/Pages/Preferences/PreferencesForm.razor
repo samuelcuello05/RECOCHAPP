@@ -1,0 +1,151 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<style>
+    .container {
+        background-image: url('/images/crearplanfondo.jpg');
+        height: 100vh;
+        overflow: hidden;
+        padding: 2rem 1rem;
+    }
+
+    .titulo {
+        font-weight: 700;
+        color: #DC4920;
+        text-align: left;
+        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+        font-size: 70px;
+        font-weight: bold;
+        margin-left: 400px;
+    }
+
+    .input-title {
+        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+        font-size: 60px;
+        color: #DC4920;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .volver-icono {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .input-plan {
+        margin-bottom: 2rem;
+        margin-left: 4rem;
+    }
+
+        .input-plan label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-plan input {
+            width: 100%;
+            max-width: 500px; /* nuevo */
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: #f3f3f3;
+        }
+
+    .selectors {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    .selector h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .selectors select {
+        width: 180px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn:hover {
+            background-color: #2563eb;
+        }
+
+</style>
+
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="preferences-background">
+        <h1 class="title">QUÉ TE GUSTARÍA HACER</h1>
+
+        <div class="selects-container">
+            <div class="select-group">
+                <h3 class="label">CATEGORÍA</h3>
+                <select @bind="Preference.Category" class="select">
+                    <option value="">Selecciona una opción</option>
+                    <option>Comida</option>
+                    <option>Música</option>
+                    <option>Aventura</option>
+                    <option>Entretenimiento</option>
+                    <option>Deporte</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <h3 class="label">ACTIVIDAD</h3>
+                <select @bind="Preference.Activity" class="select">
+                    <option value="">Selecciona una opción</option>
+                    <option>Restaurantes</option>
+                    <option>Conciertos y discotecas</option>
+                    <option>Viajes</option>
+                    <option>Parques recreativos y cine</option>
+                    <option>Estadios, deportes y gym</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <h3 class="label">PRESUPUESTO</h3>
+                <select @bind="Preference.Budget" class="select">
+                    <option value="">Selecciona una opción</option>
+                    <option>10.000 - 50.000</option>
+                    <option>50.000 - 100.000</option>
+                    <option>100.000 - 500.000</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">Ingresar preferencias</button>
+        </div>
+    </div>
+</EditForm>
+
+
