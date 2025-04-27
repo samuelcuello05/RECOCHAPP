@@ -45,128 +45,145 @@
 
 
     .volver-icono {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-    }
-
-    .input-plan {
-    margin-bottom: 2rem;
-    margin-left: 4rem;
-    }
-
-    .input-plan label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    }
-
-    .input-plan input {
-    width: 100%;
-    max-width: 500px; /* nuevo */
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    background-color: #f3f3f3;
-    }
-
-    .form-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    margin-left: 19rem;
-    gap: 2rem;
-    }
-
-    .card {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 1000px;
-    width: 450px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-    }
-
-
-    .card-title {
-    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
-    color: #DC4920;
-    font-size: 30px;
-    margin: 10px 0;
-    text-align: center;
-    }
-
-    .fecha {
-    color: #333;
-    margin: 10px 0;
-    text-align: center;
-    }
-
-    .btn-ver {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 24px;
-        border-radius: 12px;
+        background-color: white;
+        color: #3b82f6; /* Azul bonito */
+        border-radius: 20%;
+        padding: 10px;
+        font-size: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        text-decoration: none;
-        text-align: center;
-        display: inline-block;
+        position: fixed;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s, transform 0.3s;
+        left: 240px;
     }
 
-        .btn-ver:hover, .btn-ver:focus, .btn-ver:active {
-            color: white; /* Asegura que el color del texto se mantenga blanco */
-            outline: none; /* Elimina el borde de enfoque por defecto */
+        .volver-icono:hover {
+            background-color: #f0f0f0; /* Un gris muy clarito al hacer hover */
+            transform: scale(1.1);
         }
 
-    .inputs-container{
-    margin-left: 120px;
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
     }
+
+    .plan-card {
+        background: rgba(255, 255, 255, 0.2); /* Fondo muy sutil o quítalo si quieres */
+        border-radius: 15px;
+        padding: 1.5rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        backdrop-filter: blur(5px); /* Esto le da un efecto de vidrio si quieres */
+    }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+    .plan-title {
+        font-family: 'Beautiful Freak Bold', sans-serif;
+        font-size: 30px;
+        color: #DC4920;
+        margin-bottom: 0.5rem;
+    }
+
+    .plan-date {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 1rem;
+    }
+
+    .plan-button {
+        background-color: #3b82f6; /* Azul bonito */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .plan-button:hover {
+            background-color: #2563eb;
+            color: white;
+        }
+
+    .plans-container {
+        max-height: calc(100vh - 250px); /* Altura ajustable según tus necesidades */
+        overflow-y: auto; /* Habilita el scroll vertical */
+        padding: 1rem;
+        /* Estilo opcional para la barra de scroll */
+        scrollbar-width: thin;
+        scrollbar-color: #DC4920 rgba(220, 73, 32, 0.1);
+    }
+
+        /* Estilos para la barra de desplazamiento en WebKit (Chrome, Safari) */
+        .plans-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .plans-container::-webkit-scrollbar-track {
+            background: rgba(220, 73, 32, 0.1);
+            border-radius: 10px;
+        }
+
+        .plans-container::-webkit-scrollbar-thumb {
+            background-color: #DC4920;
+            border-radius: 10px;
+        }
+
 
 </style>
 
 <div class="background"></div>
+<a href="/groups" class="volver-icono"><img src="/images/volverCrearGrupo.png" alt="VolverImage" /></a>
 <div class="container">
-
     <div class="titulo">NOMBRE DEL GRUPO</div>
 
     <div class="form-content">
-        <div class="inputs-container">
             <h1 class="input-title">PLANES</h1>
             @if (Plans == null)
             {
-                <div class="card">
+            <div class="plans-container">
                     <h2 class="card-title">CARGANDO PLANES. . .</h2>
-                </div>
+            </div>
             }
             else if (!Plans.Any())
             {
-                <div class="card">
+            <div class="plans-container">
                     <h2 class="card-title">No hay planes disponibles.</h2>
-                </div>
+            </div>
             }
             else
             {
-                @foreach (var plan in Plans)
-                {
-                    <div class="card">
-                        <h2 class="card-title">@plan.Name</h2>
-                        <p class="fecha">Fecha: @plan.Date.ToString("dd/MM/yyyy")</p>
-                        <a class="btn-ver" href="@($"/preferences/create/{plan.Id}")">Seleccionar preferencia</a><br />
-                        <a class="btn-ver" href="@($"/preferences/{plan.Id}")">Elegir recomendaciones</a>
+                <div class="plans-container">
+                    <div class="plans-grid">
+                        @foreach (var plan in Plans)
+                        {
+                            <div class="plan-card">
+                                <h2 class="plan-title">@plan.Name</h2>
+                                <p class="plan-date">Fecha: @plan.Date.ToString("dd/MM/yyyy")</p>
+                                <a class="plan-button" href="@($"/preferences/create/{plan.Id}")">Seleccionar preferencia</a>
+                                <a class="plan-button" href="@($"/preferences/{plan.Id}")">Votar preferencias</a>
+                            </div>
+                        }
                     </div>
-                }
+                </div>
             }
 
-            </div>
-
     </div>
+
 </div>
+
 

@@ -1,5 +1,6 @@
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Recochapp.Frontend.Repositories;
 using Recochapp.Shared.Entities;
 
@@ -10,6 +11,9 @@ namespace Recochapp.Frontend.Pages.Plans
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
+
+        [EditorRequired, Parameter] public EventCallback OnValidSubmit { get; set; }
+        [EditorRequired, Parameter] public EventCallback ReturnAction { get; set; }
 
         private List<Plan>? Plans { get; set; }
 
@@ -33,5 +37,6 @@ namespace Recochapp.Frontend.Pages.Plans
                 await SweetAlertService.FireAsync("Alerta", "No hay planes disponibles.", SweetAlertIcon.Warning);
             }
         }
+
     }
 }

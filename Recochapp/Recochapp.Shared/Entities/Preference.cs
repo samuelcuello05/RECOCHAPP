@@ -32,6 +32,7 @@ namespace Recochapp.Shared.Entities
         [JsonIgnore]
         public Establishment? Establishment { get; set; }
         public int EstablishmentId { get; set; }
+        public string? EstablishmentName { get; set; } = null!;
 
         [JsonIgnore]
         public ICollection<UserPreference>? UserPreferences { get; set; }

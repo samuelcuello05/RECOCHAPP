@@ -53,6 +53,14 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
+                var establishment = await _dbcontext.Establishments.FirstOrDefaultAsync(e => e.Id == preference.EstablishmentId);
+                if (establishment == null)
+                {
+                    return BadRequest("El establecimiento no existe.");
+                }
+
+                preference.EstablishmentName = establishment.Name;
+
                 _dbcontext.Add(preference);
                 await _dbcontext.SaveChangesAsync();
                 return Ok(preference);
