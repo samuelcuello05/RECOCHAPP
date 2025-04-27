@@ -45,11 +45,11 @@ namespace Recochapp.Shared.Entities
 
         [JsonIgnore]
         public Group? Group { get; set; }
-        public int? GroupId { get; set; }
+        public int GroupId { get; set; }
 
         [JsonIgnore]
         public Establishment? Establishment { get; set; }
-        public int? EstablishmentId { get; set; }
+        public int EstablishmentId { get; set; }
 
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }

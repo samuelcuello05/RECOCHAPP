@@ -55,6 +55,11 @@ namespace Recochapp.Shared.Entities
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = null!;
 
+        [Display(Name = "Rango de precios")]
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "El rango de precios es obligatorio")]
+        public string? Prices { get; set; }
+
         public double AverageRating { get; set; } = 0;
 
         [DataType(DataType.ImageUrl)]

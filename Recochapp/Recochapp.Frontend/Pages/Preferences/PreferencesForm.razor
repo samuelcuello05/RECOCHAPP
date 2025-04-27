@@ -1,109 +1,180 @@
 ﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
 <style>
-    .container {
-        background-image: url('/images/crearplanfondo.jpg');
-        height: 100vh;
-        overflow: hidden;
-        padding: 2rem 1rem;
+    .preferences-background {
+    background-image: url('/images/crearplanfondo.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 2rem 1rem; /* Menos padding lateral para móviles */
+    color: #DC4920;
+    text-align: center;
+    height: 100vh; /* No solo min-height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Que el contenido se distribuya bonito */
+    position: relative;
     }
 
-    .titulo {
-        font-weight: 700;
-        color: #DC4920;
-        text-align: left;
-        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
-        font-size: 70px;
-        font-weight: bold;
-        margin-left: 400px;
+    .title {
+    margin-top: 2rem; /* Mucho menos margen arriba */
+    font-size: 80px; /* Tamaño más pequeño adaptable */
+    margin-bottom: 1rem;
+    font-family: 'Beautiful Freak Bold', sans-serif;
     }
 
-    .input-title {
-        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
-        font-size: 60px;
-        color: #DC4920;
-        margin-bottom: 20px;
-        text-align: center;
+    .selects-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+    flex-wrap: wrap;
     }
 
-    .form-wrapper {
-        display: flex;
-        justify-content: center;
+    .select-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     }
 
+    .label {
+    font-size: 40px;
+    margin-bottom: 0.5rem;
+    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+    }
 
+    .select {
+    width: 200px;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    }
+
+    .button-container {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    }
     .volver-icono {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        cursor: pointer;
-        font-size: 1.5rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
     }
 
-    .input-plan {
-        margin-bottom: 2rem;
-        margin-left: 4rem;
+    .submit-button {
+    background-color: #4A7CFF;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
     }
 
-        .input-plan label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .input-plan input {
-            width: 100%;
-            max-width: 500px; /* nuevo */
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            background-color: #f3f3f3;
-        }
-
-    .selectors {
-        display: flex;
-        justify-content: center;
-        gap: 60px;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
+    .submit-button:hover {
+    background-color: #3f6be0;
     }
 
-    .selector h2 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        font-weight: bold;
+    .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro translúcido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Para que esté encima de todo */
     }
 
-    .selectors select {
-        width: 180px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 1em;
+    .modal-grid-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    text-align: center;
+    font-family: 'Beautiful Freak Bold', sans-serif;
     }
 
-    .btn {
-        padding: 12px 24px;
-        background-color: #3b82f6;
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background-color 0.3s;
+    .modal-grid-content h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #DC4920; /* Puedes cambiar este color */
     }
 
-        .btn:hover {
-            background-color: #2563eb;
-        }
+    .establishment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Poppins', sans-serif;
+    }
 
+    .establishment-card {
+    background: #f9f9f9;
+    border-radius: 15px;
+    padding: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    }
+
+    .establishment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .establishment-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    }
+
+    .establishment-card h3 {
+    font-size: 1.2rem;
+    color: #DC4920;
+    margin: 0.5rem 0;
+    }
+
+    .establishment-card p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #555;
+    }
+
+    .finish-button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Poppins', sans-serif;
+    }
+
+    .finish-button:hover {
+    background-color: #0056b3;
+    }
+
+    .validation-errors{
+    display: none !important;
+    }
 </style>
 
-<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+<EditForm EditContext="editContext" OnValidSubmit="OnFormValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="preferences-background">
+        <span class="volver-icono" @onclick="ConfirmReturnAsync"><img src="/images/volverCrearGrupo.png" alt="VolverImage" /></span>
         <h1 class="title">QUÉ TE GUSTARÍA HACER</h1>
 
         <div class="selects-container">
@@ -117,6 +188,7 @@
                     <option>Entretenimiento</option>
                     <option>Deporte</option>
                 </select>
+                <ValidationMessage For="@(() => Preference.Category)" />
             </div>
 
             <div class="select-group">
@@ -129,6 +201,7 @@
                     <option>Parques recreativos y cine</option>
                     <option>Estadios, deportes y gym</option>
                 </select>
+                <ValidationMessage For="@(() => Preference.Activity)" />
             </div>
 
             <div class="select-group">
@@ -139,13 +212,55 @@
                     <option>50.000 - 100.000</option>
                     <option>100.000 - 500.000</option>
                 </select>
+                <ValidationMessage For="@(() => Preference.Budget)" />
             </div>
         </div>
 
         <div class="button-container">
-            <button type="submit" class="submit-button">Ingresar preferencias</button>
+            <button type="submit" class="submit-button">Continuar</button>
         </div>
     </div>
 </EditForm>
+@if (showSelectEstablishmentModal)
+{
+    <div class="modal-backdrop">
+        <div class="modal-grid-content">
+            <h2>Selecciona un Establecimiento</h2>
+
+            @if (Establishments == null)
+            {
+                <p>Cargando establecimientos...</p>
+            }
+            else
+            {
+                    @foreach (var establishment in Establishments)
+                    {
+                        @if (establishment.Category == Preference.Category || establishment.Prices == Preference.Category)
+                        {
+                        <div class="establishment-grid">
+
+                            <div class="establishment-card" @onclick="() => SelectEstablishment(establishment.Id)">
+                                <img class="establishment-img" src="@establishment.ImageUrl" alt="@establishment.Name" />
+                                <h3>@establishment.Name</h3>
+                                <p><strong>Categoría:</strong> @establishment.Category</p>
+                                <p><strong>Descripción:</strong> @establishment.Description</p> 
+                                <p><strong>Ubicación:</strong> @establishment.Address 📍</p>
+                                <p><strong>Precios:</strong> @establishment.Prices</p>
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                        <p style="font-family: 'Poppins', sans-serif;">No se encontraron establecimientos...</p>
+
+                        }
+                    }
+                
+            }
+
+            <button class="finish-button" @onclick="CloseModal">Regresar</button>
+        </div>
+    </div>
+}
 
 

@@ -27,5 +27,20 @@ namespace Recochapp.Backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(Establishment establishment)
+        {
+            try
+            {
+                _dbcontext.Add(establishment);
+                await _dbcontext.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

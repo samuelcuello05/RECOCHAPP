@@ -1,7 +1,20 @@
 ﻿@page "/Plans"
 <style>
+
+    .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/images/crearplanfondo.jpg');
+        background-size: 90%;
+        background-position: 100% center;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
     .container {
-    background-image: url('/images/crearplanfondo.jpg');
     height: 100vh;
     overflow: hidden;
     padding: 2rem 1rem;
@@ -91,17 +104,27 @@
     .fecha {
     color: #333;
     margin: 10px 0;
+    text-align: center;
     }
 
     .btn-ver {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
     }
+
+        .btn-ver:hover, .btn-ver:focus, .btn-ver:active {
+            color: white; /* Asegura que el color del texto se mantenga blanco */
+            outline: none; /* Elimina el borde de enfoque por defecto */
+        }
 
     .inputs-container{
     margin-left: 120px;
@@ -109,6 +132,7 @@
 
 </style>
 
+<div class="background"></div>
 <div class="container">
 
     <div class="titulo">NOMBRE DEL GRUPO</div>
@@ -134,15 +158,15 @@
                 {
                     <div class="card">
                         <h2 class="card-title">@plan.Name</h2>
-                        <p class="fecha">Fecha: @plan.Date</p>
-                        <a class="btn-ver" href="@($"/preferences/create/{plan.Id}")">Ver</a>
+                        <p class="fecha">Fecha: @plan.Date.ToString("dd/MM/yyyy")</p>
+                        <a class="btn-ver" href="@($"/preferences/create/{plan.Id}")">Seleccionar preferencia</a><br />
+                        <a class="btn-ver" href="@($"/preferences/{plan.Id}")">Elegir recomendaciones</a>
                     </div>
                 }
             }
 
             </div>
 
-        </div>
-
+    </div>
 </div>
 

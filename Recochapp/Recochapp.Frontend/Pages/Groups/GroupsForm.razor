@@ -1,8 +1,19 @@
 ﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
 <style>
-    .crear-grupo-container {
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('/images/creargrupofondo.png');
+        background-size: 90%;
+        background-position: 100% center;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+    .crear-grupo-container {
         height: 100vh;
         overflow: hidden;
         padding: 2rem 1rem;
@@ -107,6 +118,8 @@
         font-weight: bold;
     }
 </style>
+
+<div class="background"></div>
 
 <div class="crear-grupo-container">
 

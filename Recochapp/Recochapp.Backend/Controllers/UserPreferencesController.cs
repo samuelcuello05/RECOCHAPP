@@ -61,5 +61,25 @@ namespace Recochapp.Backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            try
+            {
+                var userpreference = await _dbcontext.UserPreferences.FindAsync(id);
+                if (userpreference == null)
+                {
+                    return NotFound();
+                }
+                _dbcontext.Remove(userpreference);
+                await _dbcontext.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
