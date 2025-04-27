@@ -1,8 +1,20 @@
 ﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
 <style>
-    .container {
+    .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('/images/crearplanfondo.jpg');
+        background-size: 90%;
+        background-position: 100% center;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    .container {
         height: 100vh;
         overflow: hidden;
         padding: 2rem 1rem;
@@ -104,7 +116,7 @@
     }
 
 </style>
-
+<div class="background"></div>
 <div class="container">
 
     <div class="titulo-crear">VAMOS A ARMAR LA GUACHAFITA</div>

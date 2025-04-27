@@ -1,0 +1,188 @@
+﻿@page "/preferences/{Id:int}"
+
+<style>
+
+    .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/crearplanfondo.jpg');
+    background-size: 90%;
+    background-position: 100% center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    }
+
+    .container {
+    height: 100vh;
+    overflow: hidden;
+    padding: 2rem 1rem;
+    }
+
+    .titulo {
+    font-weight: 700;
+    color: #DC4920;
+    text-align: left;
+    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+    font-size: 70px;
+    font-weight: bold;
+    margin-left: 400px;
+    }
+
+    .input-title {
+    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+    font-size: 60px;
+    color: #DC4920;
+    margin-bottom: 20px;
+    text-align: center;
+    }
+
+    .form-wrapper {
+    display: flex;
+    justify-content: center;
+    }
+
+
+    .volver-icono {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    }
+
+    .input-plan {
+    margin-bottom: 2rem;
+    margin-left: 4rem;
+    }
+
+    .input-plan label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    }
+
+    .input-plan input {
+    width: 100%;
+    max-width: 500px; /* nuevo */
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #f3f3f3;
+    }
+
+    .form-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    margin-left: 19rem;
+    gap: 2rem;
+    }
+
+    .card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    width: 450px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    }
+
+
+    .card-title {
+    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+    color: #DC4920;
+    font-size: 30px;
+    margin: 10px 0;
+    text-align: center;
+    }
+
+    .fecha {
+    color: #333;
+    margin: 10px 0;
+    text-align: center;
+    }
+
+    .btn-ver {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    }
+
+    .btn-ver:hover, .btn-ver:focus, .btn-ver:active {
+    color: white; /* Asegura que el color del texto se mantenga blanco */
+    outline: none; /* Elimina el borde de enfoque por defecto */
+    }
+
+    .inputs-container {
+    margin-left: 120px;
+    }
+
+</style>
+
+<div class="background"></div>
+<div class="container">
+
+    <div class="titulo">PREFERENCIAS</div>
+
+    <div class="form-content">
+        <div class="inputs-container">
+            @if (Preferences == null)
+            {
+                <div class="card">
+                    <h2 class="card-title">CARGANDO PREFERENCIAS. . .</h2>
+                </div>
+            }
+            else if (!Preferences.Any())
+            {
+                <div class="card">
+                    <h2 class="card-title">No hay preferencias disponibles.</h2>
+                </div>
+            }
+            else
+            {   
+                @foreach (var userpreference in UserPreferences!)
+                {
+                    if(userpreference.PlanId == Id)
+                    {
+                        var preferenceId = userpreference.PreferenceId;
+                        @foreach (var preference in Preferences!)
+                        {
+                            if(preference.Id==preferenceId)
+                            {
+                                var establishment = Establishments?.FirstOrDefault(e => e.Id == preference.EstablishmentId);
+                                <div class="card">
+                                    <h2 class="card-title">@establishment?.Name</h2>
+                                    <p class="budget">Presupuesto: @preference?.Budget</p>
+                                    <p class="budget">Categoria: @preference?.Category</p>
+                                    <p class="budget">Actividad: @preference?.Activity</p>
+                                    <a class="btn-ver" href="@($"")">Votar</a><br />
+                                </div>
+                            }
+
+                            
+                        }
+                    }
+                    
+                }
+            }
+
+        </div>
+
+    </div>
+</div>
+
+
