@@ -49,5 +49,31 @@ namespace Recochapp.Frontend.Pages.Users
 
             context.PreventNavigation();
         }
+
+        private async Task ConfirmReturnAsync()
+        {
+            var formWasEdited = editContext.IsModified();
+
+            if (!formWasEdited || FormPostedSuccessfully)
+            {
+                await ReturnAction.InvokeAsync();
+                return;
+            }
+
+            var result = await SweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "¿Estás seguro?",
+                Text = "Perderás los cambios no guardados.",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Sí, volver",
+                CancelButtonText = "Cancelar"
+            });
+
+            if (!string.IsNullOrEmpty(result.Value))
+            {
+                await ReturnAction.InvokeAsync();
+            }
+        }
     }
 }

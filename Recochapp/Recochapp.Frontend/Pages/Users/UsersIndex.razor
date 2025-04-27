@@ -9,13 +9,16 @@
 <GenericList MyList="Users">
     <Body>
         <table class="table table-striped">
-            <thread>
+            <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Correo</th>
+                    <th>Apellido</th>
+                    <th>Correo electrónico</th>
+                    <th>Télefono</th>
+                    <th>Fecha de nacimiento</th>
                     <th>Acciones</th>
                 </tr>
-            </thread>
+            </thead>
             <tbody>
                 @foreach(var user in Users!)
                 {

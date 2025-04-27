@@ -47,14 +47,6 @@
 
     }
 
-    .volver-icono {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        cursor: pointer;
-        font-size: 1.5rem;
-    }
-
     .paso-1 {
         font-size: 1.25rem;
         font-weight: bold;
@@ -107,16 +99,42 @@
         display: flex;
         justify-content: flex-end;
         margin-top: -100px;
+        gap: 1rem;
     }
 
     .boton-crear {
-        background-color: #3B82F6;
+        background-color: #3b82f6;
         color: white;
+        padding: 10px 20px;
         border: none;
-        padding: 0.75rem 3rem;
-        border-radius: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
         font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
+
+    .boton-crear:hover {
+        background-color: #2563eb;
+        color: white;
+    }
+
+    .boton-cancelar {
+        background-color: #E94B2B;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .boton-cancelar:hover {
+            background-color: #cf2e20;
+            color: white;
+        }
 </style>
 
 <div class="background"></div>
@@ -127,9 +145,6 @@
 
     <div class="form-wrapper">
         <div class="form-box">
-
-            <span class="volver-icono" @onclick="ConfirmReturnAsync"><img src="/images/volverCrearGrupo.png" alt="VolverImage" /></span><br /><br />
-
             <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
                 <DataAnnotationsValidator />
 
@@ -155,6 +170,8 @@
 
                 <div class="boton-container">
                     <button type="submit" class="boton-crear">Crear</button>
+                    <span class="boton-cancelar" @onclick="ConfirmReturnAsync">Cancelar</span>
+
                 </div>
             </EditForm>
         </div>
