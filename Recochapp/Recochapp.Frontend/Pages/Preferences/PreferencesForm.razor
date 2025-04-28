@@ -11,7 +11,7 @@
     height: 100vh; /* No solo min-height */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Que el contenido se distribuya bonito */
+    justify-content: space-between;
     position: relative;
     }
 
@@ -39,7 +39,7 @@
     .label {
     font-size: 40px;
     margin-bottom: 0.5rem;
-    font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
+    font-family: 'Beautiful Freak Bold', sans-serif;
     }
 
     .select {
@@ -69,7 +69,7 @@
     }
 
         .volver-icono:hover {
-            background-color: #f0f0f0; /* Un gris muy clarito al hacer hover */
+            background-color: #f0f0f0;
             transform: scale(1.1);
         }
 
@@ -118,7 +118,7 @@
     .modal-grid-content h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
-    color: #DC4920; /* Puedes cambiar este color */
+    color: #DC4920;
     }
 
     .establishment-grid {
@@ -245,29 +245,24 @@
             {
                 <p>Cargando establecimientos...</p>
             }
+            else if (Establishments.Count == 0)
+            {
+                <p style="font-family: 'Poppins', sans-serif;">No se encontraron establecimientos que coincidan con tus preferencias...</p>
+            }
             else
             {
                     @foreach (var establishment in Establishments)
                     {
-                        @if (establishment.Category == Preference.Category || establishment.Prices == Preference.Category)
-                        {
                         <div class="establishment-grid">
-
                             <div class="establishment-card" @onclick="() => SelectEstablishment(establishment.Id)">
                                 <img class="establishment-img" src="@establishment.ImageUrl" alt="@establishment.Name" />
                                 <h3>@establishment.Name</h3>
                                 <p><strong>Categoría:</strong> @establishment.Category</p>
-                                <p><strong>Descripción:</strong> @establishment.Description</p> 
+                                <p><strong>Descripción:</strong> @establishment.Description</p>
                                 <p><strong>Ubicación:</strong> @establishment.Address 📍</p>
                                 <p><strong>Precios:</strong> @establishment.Prices</p>
                             </div>
                         </div>
-                        }
-                        else
-                        {
-                        <p style="font-family: 'Poppins', sans-serif;">No se encontraron establecimientos...</p>
-
-                        }
                     }
                 
             }
