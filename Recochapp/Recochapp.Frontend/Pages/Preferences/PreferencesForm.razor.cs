@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components;
 using Recochapp.Shared.Entities;
 using Recochapp.Frontend.Repositories;
+using Recochapp.Shared.Filters;
 
 namespace Recochapp.Frontend.Pages.Preferences
 {
@@ -37,6 +38,12 @@ namespace Recochapp.Frontend.Pages.Preferences
             if (!response.Error)
             {
                 Establishments = response.Response;
+
+                // Aplicar filtros con Strategy
+                var context = new EstablishmentFilterContext();
+                context.AddStrategy(new CombinedFilterStrategy());
+
+                Establishments = context.ApplyFilters(Establishments, Preference).ToList();
             }
         }
 
@@ -45,7 +52,6 @@ namespace Recochapp.Frontend.Pages.Preferences
             Preference.EstablishmentId = establishmentId;
             showSelectEstablishmentModal = false;
 
-            // Ahora sí envías el formulario
             await OnValidSubmit.InvokeAsync();
         }
 
