@@ -194,38 +194,38 @@
         <div class="selects-container">
             <div class="select-group">
                 <h3 class="label">CATEGORÍA</h3>
-                <select @bind="Preference.Category" class="select">
-                    <option value="">Selecciona una opción</option>
+                <InputSelect @bind-Value="Preference.Category" class="form-control">
+                    <option value="">Seleccione una opción</option>
                     <option>Comida</option>
                     <option>Música</option>
                     <option>Aventura</option>
                     <option>Entretenimiento</option>
                     <option>Deporte</option>
-                </select>
+                </InputSelect>
                 <ValidationMessage For="@(() => Preference.Category)" />
             </div>
 
             <div class="select-group">
                 <h3 class="label">ACTIVIDAD</h3>
-                <select @bind="Preference.Activity" class="select">
+                <InputSelect @bind-Value="Preference.Activity" class="form-control">
                     <option value="">Selecciona una opción</option>
                     <option>Restaurantes</option>
                     <option>Conciertos y discotecas</option>
                     <option>Viajes</option>
                     <option>Parques recreativos y cine</option>
                     <option>Estadios, deportes y gym</option>
-                </select>
+                </InputSelect>
                 <ValidationMessage For="@(() => Preference.Activity)" />
             </div>
 
             <div class="select-group">
                 <h3 class="label">PRESUPUESTO</h3>
-                <select @bind="Preference.Budget" class="select">
+                <InputSelect @bind-Value="Preference.Budget" class="form-control">
                     <option value="">Selecciona una opción</option>
                     <option>10.000 - 50.000</option>
                     <option>50.000 - 100.000</option>
                     <option>100.000 - 500.000</option>
-                </select>
+                </InputSelect>
                 <ValidationMessage For="@(() => Preference.Budget)" />
             </div>
         </div>
@@ -251,19 +251,19 @@
             }
             else
             {
-                    @foreach (var establishment in Establishments)
-                    {
-                        <div class="establishment-grid">
-                            <div class="establishment-card" @onclick="() => SelectEstablishment(establishment.Id)">
-                                <img class="establishment-img" src="@establishment.ImageUrl" alt="@establishment.Name" />
-                                <h3>@establishment.Name</h3>
-                                <p><strong>Categoría:</strong> @establishment.Category</p>
-                                <p><strong>Descripción:</strong> @establishment.Description</p>
-                                <p><strong>Ubicación:</strong> @establishment.Address 📍</p>
-                                <p><strong>Precios:</strong> @establishment.Prices</p>
-                            </div>
+                @foreach (var establishment in Establishments)
+                {
+                    <div class="establishment-grid">
+                        <div class="establishment-card" @onclick="() => SelectEstablishment(establishment.Id)">
+                            <img class="establishment-img" src="@establishment.ImageUrl" alt="@establishment.Name" />
+                            <h3>@establishment.Name</h3>
+                            <p><strong>Categoría:</strong> @establishment.Category</p>
+                            <p><strong>Descripción:</strong> @establishment.Description</p>
+                            <p><strong>Ubicación:</strong> @establishment.Address 📍</p>
+                            <p><strong>Precios:</strong> @establishment.Prices</p>
                         </div>
-                    }
+                    </div>
+                }
                 
             }
 

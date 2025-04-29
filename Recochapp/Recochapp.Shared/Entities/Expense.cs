@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Recochapp.Shared.Entities
 {
@@ -13,20 +9,19 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [DisplayName]
-        [Required(ErrorMessage = "Value is required.")]
-        [Range(0, double.MaxValue, ErrorMessage = "Value must be a positive number.")]
-        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Budget must be a valid number with up to two decimal places.")]
+        [Required(ErrorMessage = "El valor es obligatorio.")]
+        [Range(0, double.MaxValue, ErrorMessage = "El valor debe ser un número positivo.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "El valor debe ser un número válido con hasta dos decimales.")]
         [DataType(DataType.Currency)]
+        [Display(Name = "Valor")]
         public double Value { get; set; }
 
-        [MaxLength(200)]
-        [RegularExpression(@"^[a-zA-Z0-9\s.,!?]+$", ErrorMessage = "Description can only contain letters, numbers, and punctuation.")]
-        [Display(Name = "Expense description")]
+        [Required(ErrorMessage = "La descripción es obligatoria.")]
+        [MaxLength(200, ErrorMessage = "La descripción no puede exceder los 200 caracteres.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s.,!?#-]+$", ErrorMessage = "La descripción solo puede contener letras, números y signos de puntuación.")]
+        [Display(Name = "Descripción del gasto")]
         [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Description is required.")]
         public string Description { get; set; } = null!;
-
 
         [JsonIgnore]
         public User? User { get; set; }

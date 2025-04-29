@@ -73,13 +73,6 @@ namespace Recochapp.Frontend.Pages.Preferences
 
             Preferences = responseHttpPreferences?.Response?.Where(p => preferenceIds.Contains(p.Id)).ToList();
 
-            if (Preferences == null || !Preferences.Any())
-            {
-                await SweetAlertService.FireAsync("Alerta", "No hay preferencias disponibles.", SweetAlertIcon.Warning);
-            }
-
-
-
             var responseHttpEstablishments = await Repository.GetAsync<List<Establishment>>("api/establishments");
             if (responseHttpEstablishments.Error)
             {
@@ -91,11 +84,6 @@ namespace Recochapp.Frontend.Pages.Preferences
             var establishmentIds = Preferences?.Select(up => up.EstablishmentId).ToList();
 
             Establishments = responseHttpEstablishments.Response?.Where(est => establishmentIds.Contains(est.Id)).ToList();
-
-            if (Establishments == null || !Establishments.Any())
-            {
-                await SweetAlertService.FireAsync("Alerta", "No se encontraron establecimientos registrados.", SweetAlertIcon.Warning);
-            }
 
         }
 

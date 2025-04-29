@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Recochapp.Shared.Entities
 {
@@ -12,20 +9,20 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(8)]
+        [MaxLength(8, ErrorMessage = "El código de acceso no puede tener más de 8 caracteres.")]
         [Display(Name = "Código de acceso")]
         [DataType(DataType.Text)]
         public string? AccessCode { get; set; }
 
-        [MaxLength(50)]
-        [Required(ErrorMessage = "El campo Nombre es obligatorio.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "El Nombre solo puede contener letras.")]
+        [MaxLength(50, ErrorMessage = "El nombre no puede exceder los 50 caracteres.")]
+        [Required(ErrorMessage = "El nombre del grupo es obligatorio.")]
+        [RegularExpression(@"^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
         [Display(Name = "Nombre del grupo")]
         [DataType(DataType.Text)]
         public string Name { get; set; } = null!;
 
         [DataType(DataType.ImageUrl)]
-        [Display(Name = "Imagen")]
+        [Display(Name = "Imagen del grupo")]
         public string? ImageUrl { get; set; }
 
         [Display(Name = "Cantidad de integrantes")]

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Recochapp.Shared.Entities
 {
@@ -12,18 +9,17 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Review rating")]
-        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5.")]
+        [Required(ErrorMessage = "La calificación es obligatoria.")]
+        [Display(Name = "Calificación")]
+        [Range(1, 5, ErrorMessage = "La calificación debe estar entre 1 y 5.")]
         public double Rating { get; set; }
 
-        [MaxLength(500)]
-        [Required]
-        [RegularExpression(@"^[a-zA-Z0-9\s.,!?]+$", ErrorMessage = "Comment can only contain letters, numbers, and punctuation.")]
-        [Display(Name = "Review comment")]
+        [MaxLength(500, ErrorMessage = "El comentario no puede superar los 500 caracteres.")]
+        [Required(ErrorMessage = "El comentario es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z0-9\s.,!?áéíóúÁÉÍÓÚñÑ]+$", ErrorMessage = "El comentario solo puede contener letras, números y signos de puntuación.")]
+        [Display(Name = "Comentario")]
         [DataType(DataType.MultilineText)]
         public string Comment { get; set; } = null!;
-
 
         [JsonIgnore]
         public Establishment? Establishment { get; set; }

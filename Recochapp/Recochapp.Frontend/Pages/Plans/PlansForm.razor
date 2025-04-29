@@ -2,16 +2,16 @@
 
 <style>
     .background{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         background-image: url('/images/crearplanfondo.jpg');
-        background-size: 90%;
-        background-position: 100% center;
-        background-repeat: no-repeat;
-        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        padding: 2rem 1rem; /* Menos padding lateral para móviles */
+        text-align: left;
+        height: 100vh; /* No solo min-height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
     }
 
     .container {
@@ -129,7 +129,7 @@
         }
 
 </style>
-<div class="background"></div>
+<div class="background">
 <div class="container">
 
     <div class="titulo-crear">VAMOS A ARMAR LA GUACHAFITA</div>
@@ -188,4 +188,4 @@
     </EditForm>
 
 </div>
-
+</div>
