@@ -41,7 +41,8 @@ namespace Recochapp.Frontend.Pages.Preferences
 
                 // Aplicar filtros con Strategy
                 var context = new EstablishmentFilterContext();
-                context.AddStrategy(new CombinedFilterStrategy());
+                context.AddStrategy(new CategoryFilterStrategy());
+                context.AddStrategy(new BudgetFilterStrategy());
 
                 Establishments = context.ApplyFilters(Establishments, Preference).ToList();
             }

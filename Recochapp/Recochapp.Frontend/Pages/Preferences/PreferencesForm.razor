@@ -145,7 +145,7 @@
     .establishment-img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: initial;
     border-radius: 50%;
     margin-bottom: 0.5rem;
     }
@@ -251,9 +251,10 @@
             }
             else
             {
+                   <div class="establishment-grid">
                 @foreach (var establishment in Establishments)
                 {
-                    <div class="establishment-grid">
+                    
                         <div class="establishment-card" @onclick="() => SelectEstablishment(establishment.Id)">
                             <img class="establishment-img" src="@establishment.ImageUrl" alt="@establishment.Name" />
                             <h3>@establishment.Name</h3>
@@ -262,8 +263,9 @@
                             <p><strong>Ubicación:</strong> @establishment.Address 📍</p>
                             <p><strong>Precios:</strong> @establishment.Prices</p>
                         </div>
-                    </div>
+                    
                 }
+                </div>
                 
             }
 

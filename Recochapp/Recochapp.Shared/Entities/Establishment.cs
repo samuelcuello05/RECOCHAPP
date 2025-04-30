@@ -11,14 +11,14 @@ namespace Recochapp.Shared.Entities
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [MaxLength(50, ErrorMessage = "El nombre no puede exceder los 50 caracteres.")]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
+        [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
         [Display(Name = "Nombre")]
         [DataType(DataType.Text)]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "La categoría es obligatoria.")]
         [MaxLength(50, ErrorMessage = "La categoría no puede exceder los 50 caracteres.")]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "La categoría solo puede contener letras y espacios.")]
+        [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "La categoría solo puede contener letras y espacios.")]
         [Display(Name = "Categoría")]
         [DataType(DataType.Text)]
         public string Category { get; set; } = null!;
