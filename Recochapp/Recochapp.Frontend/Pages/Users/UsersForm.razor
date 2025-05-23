@@ -7,7 +7,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/images/creargrupofondo.png');
+        background-color: white;
         background-size: 90%;
         background-position: 100% center;
         background-repeat: no-repeat;
@@ -20,14 +20,8 @@
         padding: 2rem 1rem;
     }
 
-    .titulo-crear {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #fff;
-        text-align: center;
-        font-family: 'Beautiful Freak Bold', sans-serif; /* Añadí 'sans-serif' como respaldo */
-        font-size: 70px;
-        font-weight: bold;
+    .titulo {
+        width:200px;
     }
 
     .form-wrapper {
@@ -36,22 +30,33 @@
     }
 
     .form-box {
+        display:flex;
+        flex-direction: row;
         background-color: #ffffff;
         border-radius: 1.5rem;
-        padding: 2rem 2.5rem;
+        padding: 0;
         max-width: 1200px;
-        height: fit-content; /* se ajusta automáticamente */
-        overflow: visible; /* evita scroll */
+        height: auto; 
+        overflow: visible; 
         width: 100%;
         box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
         position: relative;
-        max-height: calc(100vh - 250px); /* Altura ajustable según tus necesidades */
-        overflow-y: auto; /* Habilita el scroll vertical */
+        max-height: calc(100vh - 250px); 
+        overflow-y: auto; 
         padding: 1rem;
-        /* Estilo opcional para la barra de scroll */
         scrollbar-width: thin;
         scrollbar-color: #DC4920 rgba(220, 73, 32, 0.1);
     }
+
+    .form-content {
+        flex: 3; /* 60% */
+        padding: 2rem;
+        overflow-y: auto;
+        max-height: calc(100vh - 200px);
+        scrollbar-width: thin;
+        scrollbar-color: #DC4920 rgba(220, 73, 32, 0.1);
+    }
+
 
         .form-box::-webkit-scrollbar {
             width: 8px;
@@ -68,7 +73,7 @@
         }
 
     .paso-1 {
-        font-size: 1.25rem;
+        font-size: 1.7rem;
         font-weight: bold;
         margin-bottom: 1rem;
     }
@@ -106,6 +111,26 @@
         gap: 1rem;
     }
 
+    .login-btn {
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        width: 250px;
+        background-color: #ff9800;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .login-btn:hover {
+            background-color: #ef8d00;
+        }
+
     .boton-crear {
         background-color: #3b82f6;
         color: white;
@@ -139,58 +164,86 @@
             background-color: #cf2e20;
             color: white;
         }
+
+    .image-section {
+        flex: 2; /* 40% */
+        background-image: url('images/createuserbackground.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px
+    }
+
+    .create-image{
+        width:300px;
+    }
+
 </style>
 
 <div class="background"></div>
 
 <div class="crear-grupo-container">
 
-    <div class="titulo-crear">PERFIL</div>
+    <div class="titulo">
+        <img src="/images/Group 3020.png" alt="Rechoapp logo" width="450px">
+    </div>
+
+    <button class="login-btn" @onclick="LoginAction">Login</button>
 
     <div class="form-wrapper">
         <div class="form-box">
-            <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
-                <DataAnnotationsValidator />
+            <div class="form-content">
 
-                <div class="paso-1">
-                    Crear usuario
-                </div>
+                <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+                    <DataAnnotationsValidator />
 
-                <div class="input-grupo">
-                    <label style="font-weight: bold;">Nombre</label>
-                    <InputText class="form-control" placeholder="Nombre del usuario" @bind-Value="@User.Name" />
-                    <ValidationMessage For="@(() => User.Name)" />
-                </div>
+                    <div class="paso-1">
+                        Vamos a armar algo chévere...
+                    </div>
 
-                <div class="input-grupo">
-                    <label style="font-weight: bold;">Apellido</label>
-                    <InputText class="form-control" placeholder="Apellido del usuario" @bind-Value="@User.Surname" />
-                    <ValidationMessage For="@(() => User.Surname)" />
-                </div>
+                    <div class="input-grupo">
+                        <label style="font-weight: bold;">Nombre</label>
+                        <InputText class="form-control" placeholder="Ingresa tu nombre" @bind-Value="@User.Name" />
+                        <ValidationMessage For="@(() => User.Name)" />
+                    </div>
 
-                <div class="input-grupo">
-                    <label style="font-weight: bold;">Número de télefono</label>
-                    <InputText class="form-control" placeholder="Télefono del usuario" @bind-Value="@User.PhoneNumber" />
-                    <ValidationMessage For="@(() => User.PhoneNumber)" />
-                </div>
+                    <div class="input-grupo">
+                        <label style="font-weight: bold;">Apellido</label>
+                        <InputText class="form-control" placeholder="Ingresa tu apellido" @bind-Value="@User.Surname" />
+                        <ValidationMessage For="@(() => User.Surname)" />
+                    </div>
 
-                <div class="input-grupo">
-                    <label style="font-weight: bold;">Correo electrónico</label>
-                    <InputText class="form-control" placeholder="Correo electrónico del usuario" @bind-Value="@User.Email" />
-                    <ValidationMessage For="@(() => User.Email)" />
-                </div>
-                <div class="input-grupo">
-                    <label style="font-weight: bold;">Fecha de nacimiento</label>
-                    <InputDate class="form-control" placeholder="Fecha de nacimiento del usuario" @bind-Value="@User.DateOfBirth" />
-                    <ValidationMessage For="@(() => User.DateOfBirth)" />
-                </div>
+                    <div class="input-grupo">
+                        <label style="font-weight: bold;">Número de télefono</label>
+                        <InputText class="form-control" placeholder="Ingresa tu télefono" @bind-Value="@User.PhoneNumber" />
+                        <ValidationMessage For="@(() => User.PhoneNumber)" />
+                    </div>
 
-                <div class="boton-container">
-                    <button type="submit" class="boton-crear">Crear</button>
-                    <span class="boton-cancelar" @onclick="ConfirmReturnAsync">Cancelar</span>
+                    <div class="input-grupo">
+                        <label style="font-weight: bold;">Correo electrónico</label>
+                        <InputText class="form-control" placeholder="Ingresa tu correo electrónico" @bind-Value="@User.Email" />
+                        <ValidationMessage For="@(() => User.Email)" />
+                    </div>
+                    <div class="input-grupo">
+                        <label style="font-weight: bold;">Fecha de nacimiento</label>
+                        <InputDate class="form-control" placeholder="Ingresa tu fecha de nacimiento" @bind-Value="@User.DateOfBirth" />
+                        <ValidationMessage For="@(() => User.DateOfBirth)" />
+                    </div>
 
-                </div>
-            </EditForm>
+                    <div class="boton-container">
+                        <button type="submit" class="boton-crear">Crear usuario</button>
+                        <a class="boton-cancelar" href="/">Cancelar</a>
+                    </div>
+                </EditForm>
+            </div>
+
+            <div class="image-section">
+                <img src="/images/createusericon.png" alt="Girasol bacano" class="create-image" >
+            </div>
         </div>
     </div>
 </div>

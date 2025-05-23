@@ -36,9 +36,11 @@ namespace Recochapp.Frontend.Pages.Users
             var result = await SweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Cuidado",
-                Text = "¿Desea regresar si guardar los cambios?",
+                Text = "¿Deseas regresar sin guardar los cambios?",
                 Icon = SweetAlertIcon.Warning,
-                ShowCancelButton = true
+                ShowCancelButton = true,
+                ConfirmButtonText = "Sí, regresar",
+                CancelButtonText = "Cancelar"
             });
 
             var confirm = !string.IsNullOrEmpty(result.Value);
@@ -48,6 +50,16 @@ namespace Recochapp.Frontend.Pages.Users
             }
 
             context.PreventNavigation();
+        }
+
+        private async Task LoginAction()
+        {
+            var result = await SweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "¡Lo sentimos!",
+                Text = "Aún no hemos implementado esta función, inténtalo de nuevo más tarde.",
+                Icon = SweetAlertIcon.Warning,
+            });
         }
 
         private async Task ConfirmReturnAsync()

@@ -53,6 +53,11 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
+                var existingUser = _dbcontext.Users.FirstOrDefault(u => u.Email.ToLower() == user.Email);
+                if(existingUser!=null)
+                {
+                    return BadRequest("Ya te encuentras registrado en nuestra aplicación.");
+                }
                 _dbcontext.Add(user);
                 await _dbcontext.SaveChangesAsync();
                 return Ok();
