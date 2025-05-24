@@ -195,7 +195,7 @@
                                 <p class="preferences-atributes"><strong>Categoría:</strong> @preferences.Category</p>
                                 <p class="preferences-atributes"><strong>Presupuesto:</strong> @preferences.Budget</p>
                                 <p class="preferences-atributes"><strong>Actividad:</strong> @preferences.Activity</p>
-                                <a class="preference-button" href="@($"")">Votar</a>
+                                <a class="preference-button" @onclick=VoteAction>Votar</a>
                             </div>
                         }
                     }

@@ -53,10 +53,24 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
-                var existingUser = _dbcontext.Users.FirstOrDefault(u => u.Email.ToLower() == user.Email);
-                if(existingUser!=null)
+                var existingEmail = _dbcontext.Users.FirstOrDefault(u => u.Email.ToLower() == user.Email);
+                var existingPhone = _dbcontext.Users.FirstOrDefault(u => u.PhoneNumber == user.PhoneNumber);
+                if (existingEmail != null || existingPhone != null)
                 {
                     return BadRequest("Ya te encuentras registrado en nuestra aplicación.");
+                }
+
+                var currentDate = DateTime.Now;
+                var bornDate = user.DateOfBirth;
+
+                if (bornDate > currentDate)
+                {
+                    return BadRequest("La fecha de nacimiento no puede ser una fecha futura");
+                }
+
+                if (bornDate > currentDate.AddYears(-15))
+                {
+                    return BadRequest("Debes ser mayor de 15 años para registrarte.");
                 }
                 _dbcontext.Add(user);
                 await _dbcontext.SaveChangesAsync();

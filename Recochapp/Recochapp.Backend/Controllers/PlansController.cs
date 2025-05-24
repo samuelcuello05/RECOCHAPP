@@ -51,6 +51,21 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
+                if (Plan.GroupId == 0)
+                {
+                    return BadRequest("Debes seleccionar un grupo para crear el plan.");
+                }
+                if (Plan.EstablishmentId == 0)
+                {
+                    return BadRequest("Debes seleccionar un establecimiento para crear el plan.");
+                }
+
+                var currentDate = DateTime.Now;
+                if (Plan.Date < currentDate.AddDays(-1))
+                {
+                    return BadRequest("La fecha para realizar el plan debe ser una fecha futura.");
+                }
+
                 _dbcontext.Add(Plan);
                 await _dbcontext.SaveChangesAsync();
                 return Ok();

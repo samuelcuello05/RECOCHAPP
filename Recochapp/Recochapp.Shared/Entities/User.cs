@@ -41,7 +41,7 @@ namespace Recochapp.Shared.Entities
         [Required(ErrorMessage = "El campo Fecha de nacimiento es obligatorio.")]
         [Display(Name = "Fecha de nacimiento")]
         [DataType(DataType.Date, ErrorMessage = "Fecha de nacimiento no válida.")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [DataType(DataType.ImageUrl)]
         [Display(Name = "Imagen")]

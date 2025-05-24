@@ -87,5 +87,15 @@ namespace Recochapp.Frontend.Pages.Preferences
 
         }
 
+        private async Task VoteAction()
+        {
+            var result = await SweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "¡Lo sentimos!",
+                Text = "Aún no hemos implementado esta función, inténtalo de nuevo más tarde.",
+                Icon = SweetAlertIcon.Warning,
+            });
+        }
+
     }
 }
