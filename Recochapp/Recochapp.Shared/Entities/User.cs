@@ -9,7 +9,7 @@ namespace Recochapp.Shared.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
+        [MaxLength(25, ErrorMessage = "El nombre no puede superar los 25 caracteres.")]
         [Required(ErrorMessage = "El campo Nombre es obligatorio.")]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
         [Display(Name = "Nombre")]
@@ -31,7 +31,7 @@ namespace Recochapp.Shared.Entities
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = null!;
 
-        [MaxLength(30, ErrorMessage = "El número de teléfono no puede superar los 30 caracteres.")]
+        [MaxLength(10, ErrorMessage = "El número de teléfono no puede superar los 10 caracteres.")]
         [Required(ErrorMessage = "El campo Número de teléfono es obligatorio.")]
         [RegularExpression(@"^\d+$", ErrorMessage = "El número de teléfono solo puede contener números.")]
         [Display(Name = "Número de teléfono")]

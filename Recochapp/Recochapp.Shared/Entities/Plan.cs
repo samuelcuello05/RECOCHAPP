@@ -44,10 +44,12 @@ namespace Recochapp.Shared.Entities
 
         [JsonIgnore]
         public Group? Group { get; set; }
+        [Required(ErrorMessage = "El grupo es obligatorio.")]
         public int GroupId { get; set; }
 
         [JsonIgnore]
         public Establishment? Establishment { get; set; }
+        [Required(ErrorMessage = "El establecimiento es obligatorio.")]
         public int EstablishmentId { get; set; }
 
         [JsonIgnore]

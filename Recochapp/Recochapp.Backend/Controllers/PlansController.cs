@@ -51,11 +51,14 @@ namespace Recochapp.Backend.Controllers
         {
             try
             {
-                if (Plan.GroupId == 0)
+                var validIdsforGroups = _dbcontext.Groups.Select(e => e.Id).ToList();
+                if (!validIdsforGroups.Contains(Plan.GroupId))
                 {
                     return BadRequest("Debes seleccionar un grupo para crear el plan.");
                 }
-                if (Plan.EstablishmentId == 0)
+
+                var validIdsforEstablishments = _dbcontext.Establishments.Select(e => e.Id).ToList();
+                if (!validIdsforEstablishments.Contains(Plan.EstablishmentId))
                 {
                     return BadRequest("Debes seleccionar un establecimiento para crear el plan.");
                 }
